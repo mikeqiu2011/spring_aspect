@@ -3,7 +3,10 @@ package main;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import services.CommentService;
 
+import java.util.logging.Logger;
+
 public class Main {
+    private static Logger logger = Logger.getLogger(Main.class.getName());
     public static void main(String[] args) {
 
         var c = new AnnotationConfigApplicationContext(ProjectConfig.class);
@@ -11,6 +14,7 @@ public class Main {
 
         var comment = new Comment("Demo comment", "Natasha");
 
-        service.publishComment(comment);
+        var result = service.publishComment(comment);
+        logger.info(result);
     }
 }

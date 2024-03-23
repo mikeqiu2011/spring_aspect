@@ -14,7 +14,7 @@ public class LoggingAspect {
     private Logger logger = Logger.getLogger(LoggingAspect.class.getName());
 
     @Around("execution(* services.*.*(..))")
-    public void log(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
         var methodName = joinPoint.getSignature().getName();
         var arguments = joinPoint.getArgs();
 
@@ -24,5 +24,7 @@ public class LoggingAspect {
 
         var returnedByMethod = joinPoint.proceed();
         logger.info("method executed and returned " + returnedByMethod);
+
+        return returnedByMethod;
     }
 }
