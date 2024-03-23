@@ -5,6 +5,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 @Aspect
@@ -14,8 +15,14 @@ public class LoggingAspect {
 
     @Around("execution(* services.*.*(..))")
     public void log(ProceedingJoinPoint joinPoint) throws Throwable {
-        logger.info("method will execute");
-        joinPoint.proceed();
-        logger.info("method executed");
+        var methodName = joinPoint.getSignature().getName();
+        var arguments = joinPoint.getArgs();
+
+        logger.info("Method " + methodName +
+                " with parameters " + Arrays.asList(arguments) +
+                " will execute");
+
+        var returnedByMethod = joinPoint.proceed();
+        logger.info("method executed and returned " + returnedByMethod);
     }
 }
