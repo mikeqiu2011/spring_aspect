@@ -22,9 +22,12 @@ public class LoggingAspect {
                 " with parameters " + Arrays.asList(arguments) +
                 " will execute");
 
-        var returnedByMethod = joinPoint.proceed();
+        var comment = new Comment("Some other text", "another author");
+        Object[] newArgs = {comment};
+
+        var returnedByMethod = joinPoint.proceed(newArgs);
         logger.info("method executed and returned " + returnedByMethod);
 
-        return returnedByMethod;
+        return "FAILED";
     }
 }
