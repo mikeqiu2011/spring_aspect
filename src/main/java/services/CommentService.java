@@ -1,5 +1,6 @@
-package main;
+package services;
 
+import main.Comment;
 import org.springframework.stereotype.Service;
 
 import java.util.logging.Logger;
