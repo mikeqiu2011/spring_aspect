@@ -14,7 +14,8 @@ public class Main {
 
         var comment = new Comment("Demo comment", "Natasha");
 
-        var result = service.publishComment(comment);
-        logger.info(result);
+        service.publishComment(comment);
+        service.editComment(comment);
+        service.deleteComment(comment);
     }
 }
